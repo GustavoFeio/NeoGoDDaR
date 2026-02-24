@@ -1,0 +1,19 @@
+ (install
+  (section bin)
+  (files (deadlock_detector.exe as GoDDaR)))
+
+(executable
+ (public_name dlock)
+ (name deadlock_detector)
+ (modules Deadlock_detector)
+ (libraries dlock)
+ (modes byte)
+ (flags (:standard -g))
+)
+
+(executable
+ (public_name migo_parser)
+ (name MiGo_parser)
+ (modules MiGo_parser)
+ (libraries dlock)
+ (modes byte))

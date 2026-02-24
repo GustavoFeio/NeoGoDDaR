@@ -1,0 +1,6 @@
+
+The reason why the same reduction gets reported twice is due to how the process is reduced.
+In one branch it starts by trying to synchronize on `t1`, which then inlines the process `main.main$1`, and then synchronizes.
+On another branch it replaces the process first, and then tries to synchronize on the channel.
+While not wrong, it is noisy to have (seemingly) the same reduction twice. We should look into refining that behavior.
+

@@ -1,0 +1,4 @@
+
+Both mains are functionally indentical. The reason for their existence is to check that GoDDaR is evaluating them the same way.
+The same result should be yielded for both.
+

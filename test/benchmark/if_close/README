@@ -1,0 +1,5 @@
+
+If a channel is closed while there is a pending write, the write is disregarded and no error is produced.
+Current behavior is to report it as a write to a closed channel.
+Should look into refining this behavior.
+
