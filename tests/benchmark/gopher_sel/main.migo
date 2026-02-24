@@ -1,0 +1,26 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    let t1 = newchan main.main0.t1_chan0, 0;
+    spawn main.provide1(t0);
+    spawn main.provide2(t1);
+    let t2 = newchan main.main0.t2_chan0, 0;
+    spawn main.collect1(t0, t2);
+    spawn main.collect2(t1, t2);
+    recv t2 (main.go:31:5);
+    let t4 = newchan main.main0.t4_chan0, 0;
+    spawn main.collect1(t0, t4);
+    spawn main.collect2(t1, t4);
+    recv t4 (main.go:36:5);
+def main.provide1(x):
+    send x (main.go:10:7);
+
+def main.provide2(y):
+    send y (main.go:13:7);
+
+def main.collect1(in, out):
+    recv in (main.go:17:12) -> (main.go:17:9);
+    send out (main.go:17:9);
+
+def main.collect2(in, out):
+    recv in (main.go:20:12) -> (main.go:20:9);
+    send out (main.go:20:9);

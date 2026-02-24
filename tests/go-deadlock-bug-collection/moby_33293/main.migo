@@ -1,0 +1,8 @@
+def main.main():
+    call main.ContainerWait();
+def main.ContainerWait():
+    tau;
+    if call main.ContainerWait#1(); else tau; endif;
+def main.ContainerWait#1():
+    let t0 = newchan nilchan, 0;
+    send t0;

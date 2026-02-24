@@ -1,0 +1,7 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    let t1 = newchan main.main0.t1_chan0, 0;
+    call main.foo(t1);
+    close t0;
+def main.foo(ch):
+    close ch;

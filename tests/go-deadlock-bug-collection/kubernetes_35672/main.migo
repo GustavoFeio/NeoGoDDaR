@@ -1,0 +1,16 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    call main.ListAndWatch(t0);
+def main.ListAndWatch$1(resyncCh, stopCh):
+    call main.ListAndWatch$1#1(resyncCh, stopCh);
+def main.ListAndWatch$1#1(resyncCh, stopCh):
+    select
+      case recv resyncCh; call main.ListAndWatch$1#2(resyncCh, stopCh);
+      case recv stopCh;
+    endselect;
+def main.ListAndWatch$1#2(resyncCh, stopCh):
+    call main.ListAndWatch$1#1(resyncCh, stopCh);
+def main.ListAndWatch(stopCh):
+    let t2 = newchan main.ListAndWatch0.t2_chan0, 0;
+    spawn main.ListAndWatch$1(t2, stopCh);
+    send t2;

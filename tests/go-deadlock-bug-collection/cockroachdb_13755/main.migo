@@ -1,0 +1,43 @@
+def main.main():
+    call main.rs.initContextClose();
+def context.propagateCancel$1():
+    let t1 = newchan nilchan, 0;
+    let t3 = newchan nilchan, 0;
+    select
+      case recv t1;
+      case recv t3;
+    endselect;
+def context.propagateCancel():
+    if tau; else call context.propagateCancel#2(); endif;
+def context.propagateCancel#2():
+    let t3 = newchan nilchan, 0;
+    select
+      case recv t3;
+      case tau; call context.propagateCancel#4();
+    endselect;
+def context.propagateCancel#4():
+    if call context.propagateCancel#5(); else call context.propagateCancel#7(); endif;
+def context.propagateCancel#5():
+    if call context.propagateCancel#8(); else call context.propagateCancel#10(); endif;
+def context.propagateCancel#7():
+    spawn context.propagateCancel$1();
+def context.propagateCancel#8():
+    call context.propagateCancel#9();
+def context.propagateCancel#9():
+    tau;
+def context.propagateCancel#10():
+    if call context.propagateCancel#11(); else call context.propagateCancel#12(); endif;
+def context.propagateCancel#11():
+    call context.propagateCancel#12();
+def context.propagateCancel#12():
+    call context.propagateCancel#9();
+def context.WithCancel():
+    if tau; else call context.WithCancel#2(); endif;
+def context.WithCancel#2():
+    call context.propagateCancel();
+def main.rs.awaitDone():
+    let t0 = newchan nilchan, 0;
+    recv t0;
+def main.rs.initContextClose():
+    call context.WithCancel();
+    spawn main.rs.awaitDone();

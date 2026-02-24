@@ -1,4 +1,0 @@
-The order of the deadlock reporting is inversed compared to before introducing the `errors` struct.
-That aside, the result is correct.
-
-This test is also known as 'select_once'.

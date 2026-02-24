@@ -1,0 +1,3 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan1, 1;
+    recv t0 (main.go:9:2);

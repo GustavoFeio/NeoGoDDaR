@@ -1,0 +1,101 @@
+def main.main():
+    call main.NewBreaker();
+    call main.b.concurrentRequests(t3, t5);
+    call main.unlockAll();
+def main.NewBreaker():
+    let t3 = newchan main.NewBreaker0.t3_chan1, 1;
+    let t5 = newchan main.NewBreaker0.t5_chan1, 1;
+
+def main.concurrentRequest$1$1(lock):
+    call main.concurrentRequest$1$1#1(lock);
+def main.concurrentRequest$1$1#1(lock):
+    recv lock (main.go:50:5);
+    send lock (main.go:51:10);
+    call main.concurrentRequest$1$1#1(lock);
+def main.concurrentRequest$1(t1):
+    let t1 = newchan main.concurrentRequest$10.t1_chan0, 0;
+    spawn main.concurrentRequest$1$1(t1);
+def main.concurrentRequest$2$1(wg_0, wg_1):
+    call main.concurrentRequest$2$1#1(wg_0, wg_1);
+def main.concurrentRequest$2$1#1(wg_0, wg_1):
+    select
+      case send wg_1 (main.go:69:18); call main.concurrentRequest$2$1#1(wg_1, wg_0);
+      case recv wg_0 (main.go:72:15); call main.concurrentRequest$2$1#3(wg_1, wg_0);
+    endselect;
+def main.concurrentRequest$2$1#3(wg_0, wg_1):
+    call main.concurrentRequest$2$1#6(wg_0, wg_1);
+def main.concurrentRequest$2$1#5(wg_0, wg_1):
+    select
+      case recv wg_0 (main.go:77:17); call main.concurrentRequest$2$1#7(wg_1, wg_0);
+      case send wg_0 (main.go:80:20); call main.concurrentRequest$2$1#9(wg_1, wg_0);
+    endselect;
+def main.concurrentRequest$2$1#6(wg_0, wg_1):
+    if call main.concurrentRequest$2$1#5(wg_1, wg_0); else call main.concurrentRequest$2$1#1(wg_1, wg_0); endif;
+def main.concurrentRequest$2$1#7(wg_1, wg_0):
+    call main.concurrentRequest$2$1#6(wg_1, wg_0);
+def main.concurrentRequest$2$1#9(wg_1, wg_0):
+    call main.concurrentRequest$2$1#6(wg_1, wg_0);
+def main.concurrentRequest$2():
+    let t2 = newchan main.concurrentRequest$20.t2_chan0, 0;
+    let t4 = newchan main.concurrentRequest$20.t4_chan0, 0;
+    spawn main.concurrentRequest$2$1(t2, t4);
+
+def main.b.Maybe(b_0, b_1):
+    let t3 = newchan nilchan, 0;
+    select
+      case send t3 (main.go:25:25); call main.b.Maybe#1();
+      case tau;
+    endselect;
+
+def main.b.Maybe#1(b_0, b_1):
+    let t10 = newchan nilchan, 0;
+    send t10 (main.go:28:20);
+
+def main.concurrentRequest$3(start_0, start_1, r_0, r_1):
+    recv start_0 (main.go:91:3);
+    let t3_0 = newchan nilchan, 0;
+    let t3_1 = newchan nilchan, 0;
+    call main.b.Maybe(t3_0, t3_1);
+    send r_1 (main.go:96:14);
+
+def main.b.concurrentRequest(b_0, b_1):
+    let t4 = newchan main.concurrentRequest$10.t1_chan0, 0;
+    call main.concurrentRequest$1(t4);
+    let t6 = newchan main.b.concurrentRequest0.t6_chan1, 1;
+    send t4 (main.go:56:9);
+    call main.concurrentRequest$2();
+    let t11 = newchan nilchan, 0;
+    send t11 (main.go:89:13);
+    let t9_1 = newchan nilchan, 0;
+    spawn main.concurrentRequest$3(t11, t9_1, t3, t6);
+    let t14 = newchan nilchan, 0;
+    recv t14 (main.go:98:2);
+
+def main.b.concurrentRequests(b_0, b_1):
+    call main.b.concurrentRequests#1(b_0, b_1);
+
+def main.b.concurrentRequests#1(b_0, b_1):
+    if call main.b.concurrentRequests#2(b_0, b_1); else tau; endif;
+
+def main.b.concurrentRequests#2(b_0, b_1):
+    call main.b.concurrentRequest(b_0, b_1);
+    call main.b.concurrentRequests#1(b_0, b_1);
+
+def main.unlock(req_0, req_1):
+    let t1 = newchan nilchan, 0;
+    recv t1 (main.go:120:2);
+    let t4 = newchan nilchan, 0;
+    recv t4 (main.go:122:8) -> (main.go:124:15);
+    send t4 (main.go:124:15);
+
+def main.unlockAll():
+    call main.unlockAll#1();
+
+def main.unlockAll#1():
+    if call main.unlockAll#2(); else tau; endif;
+
+def main.unlockAll#2():
+    let t0_0 = newchan nilchan, 0;
+    let t0_1 = newchan nilchan, 0;
+    call main.unlock(t0_0, t0_1);
+    call main.unlockAll#1();

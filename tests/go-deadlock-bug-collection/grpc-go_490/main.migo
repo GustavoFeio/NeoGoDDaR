@@ -1,0 +1,7 @@
+def main.main():
+    call main.newClientStream();
+def main.newClientStream$1():
+    let t2 = newchan nilchan, 0;
+    recv t2;
+def main.newClientStream():
+    spawn main.newClientStream$1();

@@ -1,0 +1,11 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    spawn main.worker1(t0);
+    spawn main.worker2(t0);
+def main.worker1(ch):
+    send ch (main2.go:8:5);
+    close ch;
+
+def main.worker2(ch):
+    recv ch (main2.go:13:2);
+    close ch;

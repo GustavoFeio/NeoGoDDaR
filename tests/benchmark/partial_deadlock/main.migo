@@ -1,0 +1,14 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    let t1 = newchan main.main0.t1_chan0, 0;
+    spawn main.recvr(t0, t1);
+    spawn main.sender(t0);
+    spawn main.sender(t0);
+    recv t1 (main.go:29:2);
+    recv t1 (main.go:30:2);
+def main.recvr(ch, done):
+    recv ch (main.go:15:9) -> (main.go:17:7);
+    send done (main.go:17:7);
+
+def main.sender(ch):
+    send ch (main.go:21:5);

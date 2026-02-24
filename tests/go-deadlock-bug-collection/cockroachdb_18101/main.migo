@@ -1,0 +1,20 @@
+def main.main():
+    let t2 = newchan main.main0.t2_chan0, 0;
+    spawn main.main$1(t2);
+    call main.main#1(t2);
+def main.main$1(channel):
+    call main.main$1#4(channel);
+def main.main$1#2(channel):
+    send channel;
+    call main.main$1#4(channel);
+def main.main$1#4(channel):
+    if call main.main$1#2(channel); else tau; endif;
+def main.main#1(t2):
+    recv t2;
+    if call main.main#2(t2); else tau; endif;
+def main.main#2(t2):
+    let t7 = newchan nilchan, 0;
+    select
+      case recv t7;
+      case tau; call main.main#1(t2);
+    endselect;

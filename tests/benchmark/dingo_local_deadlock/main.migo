@@ -1,0 +1,14 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    let t1 = newchan main.main0.t1_chan0, 0;
+    spawn main.Send(t0);
+    spawn main.Recv(t0, t1);
+    spawn main.Recv(t0, t1);
+    recv t1 (main.go:25:2);
+    recv t1 (main.go:26:2);
+def main.Send(ch):
+    send ch (main.go:15:48);
+
+def main.Recv(ch, done):
+    recv ch (main.go:16:53) -> (main.go:16:50);
+    send done (main.go:16:50);

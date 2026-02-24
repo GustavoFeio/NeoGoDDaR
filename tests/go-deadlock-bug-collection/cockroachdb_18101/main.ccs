@@ -1,0 +1,2 @@
+*loop?.channel!.loop!.0 || loop!.0 ||
+*loop2?.(closechannel?.0 + channel?.loop2!.0) || loop2!.0

@@ -1,0 +1,13 @@
+def main.main():
+    let t0_0 = newchan main.NewCompactor0.t0_0_chan1, 1;
+    select
+        case send t0_0;
+        case tau;
+    endselect;
+    call main.c.Start(t0_0);
+def main.c.Start(c_0):
+    send c_0;
+    spawn main.Start$1(c_0);
+def main.Start$1(c_0):
+    recv c_0;
+    call main.Start$1(c_0);

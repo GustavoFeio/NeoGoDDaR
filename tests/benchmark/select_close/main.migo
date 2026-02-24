@@ -1,0 +1,18 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    spawn main.worker(t0);
+    select
+      case recv t0 (main.go:20:12); call main.main#2(t0);
+      case send t0 (main.go:23:10);
+    endselect;
+def main.worker(ch):
+    if call main.worker#1(ch); else call main.worker#3(ch); endif;
+
+def main.worker#1(ch):
+    send ch (main.go:10:6);
+
+def main.worker#3(ch):
+    recv ch (main.go:12:3);
+
+def main.main#2(t0):
+    close t0;

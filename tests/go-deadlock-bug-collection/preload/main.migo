@@ -1,0 +1,40 @@
+def main.main():
+    call main.preload();
+def main.preload$1(limitCh, ch):
+    recv limitCh (main.go:26:4);
+    send ch (main.go:28:7);
+    send limitCh (main.go:29:12);
+def main.preload$2(ch):
+    close ch;
+def main.preload():
+    let t1 = newchan main.preload0.t1_chan1, 1;
+    let t4 = newchan main.preload0.t4_chan1, 1;
+    call main.preload#3(t1, t4);
+
+def main.preload#1(t1, t4):
+    send t4 (main.go:20:11);
+    call main.preload#3(t1, t4);
+
+def main.preload#2(t1, t4):
+    call main.preload#4(t1, t4);
+
+def main.preload#3(t1, t4):
+    ifFor (int t9 = 0; (t9<t10); t9 = t9 + 1) then call main.preload#1(t1, t4); else call main.preload#2(t1, t4); endif;
+
+def main.preload#4(t1, t4):
+    if call main.preload#5(t1, t4); else call main.preload#6(t1, t4); endif;
+
+def main.preload#5(t1, t4):
+    spawn main.preload$1(t4, t1);
+    call main.preload#4(t1, t4);
+
+def main.preload#6(t1, t4):
+    spawn main.preload$2(t1);
+    call main.preload#7(t1, t4);
+
+def main.preload#7(t1, t4):
+    recv t1 (main.go:37:2);
+    if call main.preload#8(t1, t4); else tau; endif;
+
+def main.preload#8(t1, t4):
+    if tau; else call main.preload#7(t1, t4); endif;

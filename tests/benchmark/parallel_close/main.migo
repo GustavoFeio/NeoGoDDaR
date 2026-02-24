@@ -1,0 +1,11 @@
+def main.main():
+    let t1 = newchan main.main0.t1_chan0, 0;
+    spawn main.main$1(t1);
+    spawn main.main$2(t1);
+    spawn main.main$3(t1);
+def main.main$1(ch):
+    send ch (main.go:12:6);
+def main.main$2(ch):
+    close ch;
+def main.main$3(ch):
+    recv ch (main.go:18:3);

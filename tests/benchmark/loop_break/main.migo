@@ -1,0 +1,21 @@
+def main.main():
+    let t1 = newchan main.main0.t1_chan0, 0;
+    call main.main#3(t1);
+def main.main$1(ch):
+    send ch (main.go:9:8);
+
+def main.main#1(t1):
+    if call main.main#4(t1); else call main.main#5(t1); endif;
+
+def main.main#2(t1):
+    recv t1 (main.go:14:2);
+
+def main.main#3(t1):
+    ifFor (int t5 = 0; (t5<10); t5 = t5 + 1) then call main.main#1(t1); else call main.main#2(t1); endif;
+
+def main.main#4(t1):
+    spawn main.main$1(t1);
+    call main.main#2(t1);
+
+def main.main#5(t1):
+    call main.main#3(t1);

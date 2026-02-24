@@ -1,0 +1,18 @@
+def main.main():
+    let stop = newchan main.main0.stop_chan0, 0;
+    spawn main.monitor(stop);
+    close stop;
+def main.monitor$1(results):
+    send results;
+    close results;
+def main.monitor(stop):
+    let results = newchan main.monitor0.results_chan0, 0;
+    spawn main.monitor$1(results);
+    let ctx = newchan nilchan, 0;
+    select
+      case recv stop;
+      case recv results;
+      case recv ctx; call main.monitor#6(stop, results);
+    endselect;
+def main.monitor#6(stop, results):
+    recv results;

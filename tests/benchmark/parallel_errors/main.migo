@@ -1,0 +1,33 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    if call main.main#1(t0); else call main.main#3(t0); endif;
+def main.write_deadlock(ch):
+    send ch (main.go:8:5);
+
+def main.double_close(ch):
+    close ch;
+    close ch;
+
+def main.closed_write(ch):
+    close ch;
+    send ch (main.go:22:5);
+
+def main.read_deadlock(ch):
+    recv ch (main.go:12:2);
+
+def main.main#1(t0):
+    spawn main.write_deadlock(t0);
+    call main.main#2(t0);
+
+def main.main#2(t0):
+    if call main.main#4(t0); else call main.main#6(t0); endif;
+
+def main.main#3(t0):
+    spawn main.read_deadlock(t0);
+    call main.main#2(t0);
+
+def main.main#4(t0):
+    spawn main.double_close(t0);
+
+def main.main#6(t0):
+    spawn main.closed_write(t0);

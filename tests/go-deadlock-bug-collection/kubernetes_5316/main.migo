@@ -1,0 +1,17 @@
+def main.main():
+    call main.finishRequest();
+def main.finishRequest$1(errCh, ch):
+    if call main.finishRequest$1#1(errCh, ch); else call main.finishRequest$1#3(errCh, ch); endif;
+def main.finishRequest$1#1(errCh, ch):
+    send errCh;
+def main.finishRequest$1#3(errCh, ch):
+    send ch;
+def main.finishRequest():
+    let ch = newchan main.finishRequest0.ch_chan0, 0;
+    let errCh = newchan main.finishRequest0.errCh_chan0, 0;
+    spawn main.finishRequest$1(errCh, ch);
+    select
+      case recv ch;
+      case recv errCh;
+      case tau;
+    endselect;

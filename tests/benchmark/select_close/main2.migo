@@ -1,0 +1,23 @@
+def main.main():
+    let t1 = newchan main.main0.t1_chan0, 0;
+    let t3 = newchan main.main0.t3_chan0, 0;
+    let t5 = newchan main.main0.t5_chan0, 0;
+    spawn main.main$1(t1);
+    spawn main.main$2(t3);
+    spawn main.main$3(t5);
+    select
+      case recv t1 (main2.go:25:7); call main.main#2(t1, t3, t5);
+      case recv t3 (main2.go:27:7); call main.main#4(t1, t3, t5);
+    endselect;
+def main.main$1(a):
+    send a (main2.go:15:5);
+def main.main$2(b):
+    send b (main2.go:18:5);
+def main.main$3(c):
+    recv c (main2.go:21:3);
+
+def main.main#2(t1, t3, t5):
+    close t5;
+
+def main.main#4(t1, t3, t5):
+    send t5 (main2.go:28:5);

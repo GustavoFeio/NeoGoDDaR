@@ -1,0 +1,20 @@
+def main.main():
+    call main.NewCompactor();
+    let t0_0 = newchan nilchan, 0;
+    call main.c.Suggest(t0_0);
+    let t0_0 = newchan nilchan, 0;
+    call main.c.Start(t0_0);
+def main.NewCompactor():
+    let t2 = newchan main.NewCompactor0.t2_chan1, 1;
+def main.c.Suggest(c_0):
+    tau;
+def main.Start$1():
+    call main.Start$1#1();
+def main.Start$1#1():
+    let t1 = newchan nilchan, 0;
+    recv t1;
+    call main.Start$1#1();
+def main.c.Start(c_0):
+    let t2 = newchan nilchan, 0;
+    send t2;
+    spawn main.Start$1();

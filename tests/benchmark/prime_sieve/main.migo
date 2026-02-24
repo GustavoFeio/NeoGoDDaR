@@ -1,0 +1,30 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    spawn main.Producer(t0);
+    call main.main#3(t0);
+def main.Producer(ch):
+    call main.Producer#1(ch);
+
+def main.Producer#1(ch):
+    send ch (main.go:6:6);
+    call main.Producer#1(ch);
+
+def main.Sieve(in, out):
+    call main.Sieve#1(in, out);
+
+def main.Sieve#1(in, out):
+    recv in (main.go:12:8) -> (main.go:14:8);
+    if call main.Sieve#2(in, out); else call main.Sieve#1(in, out); endif;
+
+def main.Sieve#2(in, out):
+    send out (main.go:14:8);
+    call main.Sieve#1(in, out);
+
+def main.main#1(t8):
+    recv t8 (main.go:23:12);
+    let t4 = newchan main.main0.t4_chan0, 0;
+    spawn main.Sieve(t8, t4);
+    call main.main#3(t4);
+
+def main.main#3(t8):
+    ifFor (int t9 = 0; (t9<10); t9 = t9 + 1) then call main.main#1(t8); else tau; endif;

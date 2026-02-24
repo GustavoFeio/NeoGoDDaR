@@ -1,0 +1,7 @@
+def main.main():
+    let t0 = newchan main.main0.t0_chan0, 0;
+    recv t0 (main.go:9:2);
+    send t0 (main.go:10:6);
+    let t2 = newchan main.main0.t2_chan0, 0;
+    send t2 (main.go:13:6);
+    recv t2 (main.go:14:2);
