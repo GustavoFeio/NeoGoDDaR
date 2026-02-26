@@ -41,7 +41,7 @@ the resolved program can also be return the Go code form (❾).
 ### Requirements:
 
 This approach makes use of components written in OCaml and Go, and as such, the usual minimal development tools are required.
-For OCaml, `menhir` and the `dune` build system is required to build the NeoGoDDaR tool.
+For OCaml, `menhir` parser and the `dune` build system are required to build the NeoGoDDaR tool.
 For Go, only the `go` (version 1.18) tool is required.
 
 ### Installation:
