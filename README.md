@@ -10,6 +10,8 @@
 	3.2. [Test cases](#test_cases) <br>
 		3.2.1. [Example usage](#example_usage) <br>
 
+---
+
 # NeoGoDDaR <a name="neogoddar"></a>
 NeoGoDDaR is a tool for static **D**eadlock **D**etection **a**nd **R**esolution in **Go** Programs.
 
