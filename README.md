@@ -64,6 +64,11 @@ For Go, only the `go` (version 1.18) tool is required.
 * Install Go 1.18
   * This specific version of Go is required due to compatibility reasons with the `migoinfer` tool and the fixer aspect. **Make sure any Go commands used for the setup of this tool are done with this version.**
 * Build and install migoinfer (included in gospal): https://github.com/GustavoFeio/gospal
+  ```
+  $ git clone https://github.com/GustavoFeio/gospal.git
+  $ cd gospal/cmd/migoinfer/
+  $ go install
+  ```
   * Make sure the `migoinfer` binary is located in `$PATH`
 * Clone NeoGoDDaR git repository
 ```
