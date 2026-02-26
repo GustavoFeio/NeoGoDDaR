@@ -62,7 +62,7 @@ For Go, only the `go` (version 1.18) tool is required.
 
 * Install ocaml/opam/dune/menhir
 * Install Go 1.18
-  * This specific version of Go is required due to compatibility reasons with the `migoinfer` tool and the fixer aspect.
+  * This specific version of Go is required due to compatibility reasons with the `migoinfer` tool and the fixer aspect. **Make sure any Go commands used for the setup of this tool are done with this version.**
 * Build and install migoinfer (included in gospal): https://github.com/GustavoFeio/gospal
   * Make sure the `migoinfer` binary is located in `$PATH`
 * Clone NeoGoDDaR git repository
