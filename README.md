@@ -47,6 +47,7 @@ For Go, only the `go` (version 1.18) tool is required.
 ### Installation:
 
 * Install ocaml/opam/dune/menhir
+* Install Go 1.18
 * Build and install migoinfer (included in gospal): https://github.com/GustavoFeio/gospal
   * Make sure the `migoinfer` binary is located in `$PATH`
 * Clone NeoGoDDaR git repository
