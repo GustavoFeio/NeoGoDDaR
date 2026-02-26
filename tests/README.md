@@ -1,12 +1,12 @@
 # Tests
-This directory contains two benchmarks: `benchmark/` and `go-deadlock-bug-collection/`.
+This directory contains two benchmarks: `examples/` and `go-deadlock-bug-collection/`.
 
-## Benchmark
-The `benchmark/` directory contains additional tests used during development to add and validate features as they were being implemented.
+## Examples
+The `examples/` directory contains additional tests used during development to add and validate features as they were being implemented.
 The `run_benchmark.sh` script automatically runs all of the test cases and redirects the output to a file in the test case directory under an `*.output` file.
 Below is a quick overview of available commands:
 ```sh
-Usage: ./benchmark/run_benchmark.sh
+Usage: ./examples/run_benchmark.sh
 	[-h|--help]     - Prints the available comands.
 	[-v|--verbose]  - Outputs more information about the analysis intermediate representation.
 	[-t|--terminal] - Prints the output to the terminal.
