@@ -1,7 +1,19 @@
-# NeoGoDDaR
+# Table of Contents
+1. [NeoGoDDaR](#neogoddar) <br>
+	1.1. [Features](#features) <br>
+	1.2. [Workflow](#workflow) <br>
+		1.2.3. [Components](#components) <br>
+2. [Requirements](#requirements) <br>
+	2.1. [Installation](#installation) <br>
+3. [Usage](#usage) <br>
+	3.1. [Modes of operation](#operation_modes) <br>
+	3.2. [Test cases](#test_cases) <br>
+		3.2.1. [Example usage](#example_usage) <br>
+
+# NeoGoDDaR <a name="neogoddar"></a>
 NeoGoDDaR is a tool for static **D**eadlock **D**etection **a**nd **R**esolution in **Go** Programs.
 
-## Features
+## Features <a name="features"></a>
 
 * Fully automated workflow
 * Deadlock analysis with no code annotations required
@@ -14,7 +26,7 @@ NeoGoDDaR is a tool for static **D**eadlock **D**etection **a**nd **R**esolution
   * With heuristics to prevent changing the program in undesired ways
 
 
-## Workflow
+## Workflow <a name="workflow"></a>
 
 <p align="center"> <img src="assets/pipeline.svg" alt="NeoGoDDaR pipeline" title="NeoGoDDaR pipeline" /> </p>
 
@@ -30,7 +42,7 @@ The resulting resolved program can be returned in CCS form (❼), or, with the h
 the resolved program can also be return the Go code form (❾).
 
 
-#### Components:
+### Components <a name="components"></a>
 
 * NeoGoDDaR
 * fixer
@@ -38,16 +50,17 @@ the resolved program can also be return the Go code form (❾).
 * gospal
   * Located in the following repository https://github.com/GustavoFeio/gospal
 
-### Requirements:
+# Requirements <a name="requirements"></a>
 
 This approach makes use of components written in OCaml and Go, and as such, the usual minimal development tools are required.
 For OCaml, `menhir` parser and the `dune` build system are required to build the NeoGoDDaR tool.
 For Go, only the `go` (version 1.18) tool is required.
 
-### Installation:
+## Installation <a name="installation"></a>
 
 * Install ocaml/opam/dune/menhir
 * Install Go 1.18
+  * This specific version of Go is required due to compatibility reasons with the `migoinfer` tool and the fixer aspect.
 * Build and install migoinfer (included in gospal): https://github.com/GustavoFeio/gospal
   * Make sure the `migoinfer` binary is located in `$PATH`
 * Clone NeoGoDDaR git repository
@@ -67,8 +80,8 @@ $ go install GoDDaR_fixer
 ```
 Make sure the resulting `GoDDaR_fixer` executable is in `$PATH`
 
-## Usage 
-### Modes of operation
+# Usage <a name="usage"></a>
+## Modes of operation <a name="operation_modes"></a>
 
 NeoGoDDaR can analyse programs in three different representations: Go, MiGo and CCS.
 The tool has a subcommand to process each representation:
@@ -78,8 +91,16 @@ The tool has a subcommand to process each representation:
 | MiGo           | `GoDDaR migo <MiGo file>` |
 | CCS            | `GoDDaR ccs <process>`    |
 
-### Example usage
+## Test cases <a name="test_cases"></a>
+The `tests/` directory contains two types of benchmarks:
+- The benchmark used during development, `examples/`;
+- And the benchmark for performance evaluation `go-deadlock-bug-collection/`.
+
+### Example usage <a name="example_usage"></a>
+
+Information about the command-line arguments:
 ```
+$ dune exec -- GoDDaR --help
 Usage: ./GoDDaR [-v | -ds ] [ccs <process> | migo <MiGo file> | go [-patch] <Go file>]
   -v Output extra information
   -ds Select deadlock resolution algorithm (1 or 2)
@@ -115,6 +136,7 @@ Resolved:
 
 Analyse Go:
 ```
+$ dune exec -- GoDDaR go -patch tests/examples/double_read/main.go
 Program:
 	main.main$1[ch, ch1] ::= ch1!.ch?.0;
 
