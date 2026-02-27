@@ -1,0 +1,117 @@
+# =============================================================================
+#  NeoGoDDaR — Multi-Architecture Docker Build and Publish
+#
+#  Builds and pushes a multi-arch Docker image to Docker Hub covering:
+#    - linux/amd64   (standard x86-64 desktops, servers, and CI runners)
+#    - linux/arm64   (Apple Silicon Macs, AWS Graviton, Raspberry Pi 4+)
+#    - linux/arm/v7  (Raspberry Pi 2/3 and other 32-bit ARM devices)
+#
+#  Docker Hub will automatically serve the correct image variant to each
+#  user based on their local architecture — no manual selection required.
+#
+#  TRIGGERS:
+#    - Push to main branch         (publishes the 'latest' tag)
+#    - A versioned tag (v*.*.*)    (publishes a matching version tag, e.g. v1.0.0)
+#    - Manual dispatch             (for on-demand builds)
+#
+#  REQUIRED REPOSITORY SECRETS (set in GitHub → Settings → Secrets):
+#    DOCKERHUB_USERNAME   Your Docker Hub username
+#    DOCKERHUB_TOKEN      A Docker Hub access token (not your password)
+#                         Create one at: https://hub.docker.com/settings/security
+# =============================================================================
+
+name: Build and Publish Multi-Arch Docker Image
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    name: Build and push multi-arch image
+    runs-on: ubuntu-latest
+
+    steps:
+      # -----------------------------------------------------------------
+      # 1. Check out the repository
+      # -----------------------------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # -----------------------------------------------------------------
+      # 2. Set up QEMU — enables emulation of non-native architectures
+      #    (e.g. building arm64 on an amd64 runner)
+      # -----------------------------------------------------------------
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+
+      # -----------------------------------------------------------------
+      # 3. Set up Docker Buildx — the builder backend that supports
+      #    multi-platform builds and OCI manifest lists
+      # -----------------------------------------------------------------
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # -----------------------------------------------------------------
+      # 4. Log in to Docker Hub using repository secrets
+      # -----------------------------------------------------------------
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # -----------------------------------------------------------------
+      # 5. Derive image tags automatically from the Git ref:
+      #      - main branch push  → :latest
+      #      - tag v1.2.3        → :1.2.3  and  :latest
+      #      - manual dispatch   → :latest
+      # -----------------------------------------------------------------
+      - name: Extract image metadata and tags
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/neogoddar
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      # -----------------------------------------------------------------
+      # 6. Build and push the multi-arch image.
+      #    A single manifest list is pushed to Docker Hub referencing
+      #    all three architecture-specific image layers. Docker clients
+      #    pull the correct one automatically.
+      # -----------------------------------------------------------------
+      - name: Build and push multi-arch image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Cache layers in GitHub Actions cache to speed up future builds
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # -----------------------------------------------------------------
+      # 7. Print a summary of what was built and pushed
+      # -----------------------------------------------------------------
+      - name: Print image digest
+        run: |
+          echo "### Docker Image Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Tags pushed:**" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.meta.outputs.tags }}" | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Architectures:** linux/amd64, linux/arm64, linux/arm/v7" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Digest:** ${{ steps.build-and-push.outputs.digest }}" >> $GITHUB_STEP_SUMMARY
