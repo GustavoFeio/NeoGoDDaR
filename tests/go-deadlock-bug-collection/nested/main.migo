@@ -1,8 +1,10 @@
 def main.main():
     let t1 = newchan main.main0.t1_chan0, 0;
     call main.main$1(t1);
+def main.init():
+    tau;
 def main.main$1$1$1$1$1(ch):
-    recv ch (main.go:10:12);
+    recv ch;
 def main.main$1$1$1$1(ch):
     call main.main$1$1$1$1$1(ch);
 def main.main$1$1$1(ch):

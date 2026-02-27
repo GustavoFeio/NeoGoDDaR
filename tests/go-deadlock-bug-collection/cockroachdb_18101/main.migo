@@ -1,20 +1,138 @@
 def main.main():
+    call context.Background();
     let t2 = newchan main.main0.t2_chan0, 0;
     spawn main.main$1(t2);
     call main.main#1(t2);
+def errors.New():
+    tau;
+def time.init():
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+def internal_bytealg.init#1():
+    if call internal_bytealg.init#1#1(); else call internal_bytealg.init#1#3(); endif;
+def internal_bytealg.init#1#1():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init#1#2():
+    tau;
+def internal_bytealg.init#1#3():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init():
+    call internal_bytealg.init#1();
+def runtime_internal_atomic.init():
+    tau;
+def internal_goexperiment.init():
+    tau;
+def context.init#1():
+    close _unexported_;
+def context.init():
+    call errors.New();
+    let t6 = newchan context.init0.t6_chan0, 0;
+    call context.init#1();
+def internal_itoa.init():
+    tau;
+def unsafe.init():
+    tau;
+def internal_cpu.init():
+    tau;
+def main.init():
+    tau;
+def internal_reflectlite.toType():
+    if call internal_reflectlite.toType#1(); else call internal_reflectlite.toType#2(); endif;
+def internal_reflectlite.toType#1():
+    tau;
+def internal_reflectlite.toType#2():
+    tau;
+def internal_reflectlite.TypeOf():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Kind():
+    tau;
+def internal_reflectlite.t.Elem():
+    call internal_reflectlite.t.Kind();
+    if call internal_reflectlite.t.Elem#1(); else call internal_reflectlite.t.Elem#3(); endif;
+def internal_reflectlite.t.Elem#1():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#2():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#3():
+    if call internal_reflectlite.t.Elem#2(); else call internal_reflectlite.t.Elem#5(); endif;
+def internal_reflectlite.t.Elem#4():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#5():
+    if call internal_reflectlite.t.Elem#4(); else call internal_reflectlite.t.Elem#7(); endif;
+def internal_reflectlite.t.Elem#6():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#7():
+    if call internal_reflectlite.t.Elem#6(); else call internal_reflectlite.t.Elem#9(); endif;
+def internal_reflectlite.t.Elem#8():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#9():
+    if call internal_reflectlite.t.Elem#8(); else call internal_reflectlite.t.Elem#10(); endif;
+def internal_reflectlite.t.Elem#10():
+    tau;
+def errors.init():
+    call internal_reflectlite.TypeOf();
+    call internal_reflectlite.t.Elem();
+def internal_reflectlite.init():
+    tau;
+def syscall.init():
+    tau;
+def sync_atomic.init():
+    tau;
+def sync.init#1():
+    tau;
+def sync.init#2():
+    tau;
+def sync.init():
+    call sync.init#1();
+    call sync.init#2();
+def internal_oserror.init():
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+def internal_race.init():
+    tau;
+def internal_unsafeheader.init():
+    tau;
+def runtime_internal_syscall.init():
+    tau;
+def internal_goarch.init():
+    tau;
+def internal_abi.init():
+    tau;
+def runtime_internal_sys.init():
+    tau;
+def runtime_internal_math.init():
+    tau;
+def internal_goos.init():
+    tau;
+def context.Background():
+    tau;
 def main.main$1(channel):
     call main.main$1#4(channel);
+def main.main$1#1(channel):
+    tau;
 def main.main$1#2(channel):
     send channel;
     call main.main$1#4(channel);
+def main.main$1#3(channel):
+    tau;
 def main.main$1#4(channel):
-    if call main.main$1#2(channel); else tau; endif;
+    if call main.main$1#2(channel); else call main.main$1#3(channel); endif;
 def main.main#1(t2):
     recv t2;
-    if call main.main#2(t2); else tau; endif;
+    if call main.main#2(t2); else call main.main#3(t2); endif;
 def main.main#2(t2):
     let t7 = newchan nilchan, 0;
     select
-      case recv t7;
+      case recv t7; call main.main#4(t2);
       case tau; call main.main#1(t2);
     endselect;
+def main.main#3(t2):
+    tau;
+def main.main#4(t2):
+    tau;

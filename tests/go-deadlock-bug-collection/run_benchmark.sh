@@ -30,9 +30,7 @@ root_dir=$(pwd)
 total_tests=0
 passed_tests=0
 
-# moby#21233 enters an infinite loop, therefore we skip it
-dirs=$(find . -maxdepth 1 -type d -not -name ".*" -and -not -name "*moby_21233*")
-for f in $(find $dirs -type f -name "*.migo")
+for f in $(find . -type f -name "*.migo")
 do
 	cd $(dirname $f)
 	echo ""
@@ -63,5 +61,5 @@ do
 	cd $root_dir
 done
 
-echo "Results: $passed_tests/$total_tests tests passed"
+echo "Results: $passed_tests/$total_tests tests executed successfully"
 

@@ -1,31 +1,43 @@
 def main.main():
-    let status = newchan main.main0.status_chan0, 0;
-    let stop = newchan main.main0.stop_chan0, 0;
-    let done = newchan main.main0.done_chan0, 0;
-    spawn main.n.Run(status, stop, done);
-    call main.n.Stop(status, stop, done);
-    call main.n.Status(status, stop, done);
-def main.n.Run(status, stop, done):
-    call main.n.Run#1(status, stop, done);
-def main.n.Run#1(status, stop, done):
+    let t2 = newchan main.main0.t2_chan0, 0;
+    let t4 = newchan main.main0.t4_chan0, 0;
+    let t6 = newchan main.main0.t6_chan0, 0;
+    spawn main.n.Run(t2, t4, t6);
+    call main.n.Stop(t2, t4, t6);
+    call main.n.Status(t2, t4, t6);
+def main.init():
+    tau;
+def main.n.Run(n_0, n_1, n_2):
+    call main.n.Run#1(n_0, n_1, n_2);
+def main.n.Run#1(n_0, n_1, n_2):
     select
-      case recv status; call main.n.Run#2(status, stop, done);
-      case recv stop; call main.n.Run#4(status, stop, done);
+      case recv n_0; call main.n.Run#2(n_2, n_0, n_1);
+      case recv n_1; call main.n.Run#4(n_2, n_0, n_1);
     endselect;
-def main.n.Run#2(status, stop, done):
+def main.n.Run#2(n_0, n_1, n_2):
     let t7 = newchan nilchan, 0;
     send t7;
-    call main.n.Run#1(status, stop, done);
-def main.n.Run#4(status, stop, done):
-    close done;
-def main.n.Stop(status, stop, done):
+    call main.n.Run#1(n_0, n_1, n_2);
+def main.n.Run#3(n_2, n_0, n_1):
+    tau;
+def main.n.Run#4(n_2, n_0, n_1):
+    close n_2;
+def main.n.Run#5(n_0, n_1, n_2):
+    tau;
+def main.n.Stop(n_0, n_1, n_2):
     select
-      case send stop; call main.n.Stop#1(status, stop, done);
-      case recv done;
+      case send n_1; call main.n.Stop#1(n_0, n_1, n_2);
+      case recv n_2; call main.n.Stop#3(n_0, n_1, n_2);
     endselect;
-def main.n.Stop#1(status, stop, done):
-    recv done;
-def main.n.Status(status, stop, done):
+def main.n.Stop#1(n_0, n_1, n_2):
+    recv n_2;
+def main.n.Stop#2(n_0, n_1, n_2):
+    tau;
+def main.n.Stop#3(n_0, n_1, n_2):
+    tau;
+def main.n.Stop#4(n_0, n_1, n_2):
+    tau;
+def main.n.Status(n_0, n_1, n_2):
     let t0 = newchan main.n.Status0.t0_chan0, 0;
-    send status;
+    send n_0;
     recv t0;

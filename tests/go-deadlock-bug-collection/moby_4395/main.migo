@@ -1,7 +1,10 @@
 def main.main():
     let t0 = newchan main.Go0.t2_chan0, 0;
     call main.Go(t0);
+def main.init():
+    tau;
 def main.Go$1(ch):
     send ch;
 def main.Go(t2):
+    let t2 = newchan main.Go0.t2_chan0, 0;
     spawn main.Go$1(t2);

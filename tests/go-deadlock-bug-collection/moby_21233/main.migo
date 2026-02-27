@@ -2,12 +2,154 @@ def main.main():
     let t0 = newchan main.main0.t0_chan0, 0;
     spawn main.main$1(t0);
     call main.main#1(t0);
+def runtime_internal_sys.init():
+    tau;
+def runtime_internal_math.init():
+    tau;
+def internal_goarch.init():
+    tau;
+def sync_atomic.init():
+    tau;
+def internal_cpu.init():
+    tau;
+def internal_goos.init():
+    tau;
+def main.init():
+    tau;
+def unsafe.init():
+    tau;
+def internal_race.init():
+    tau;
+def runtime_internal_syscall.init():
+    tau;
+def math_bits.init():
+    tau;
+def internal_goexperiment.init():
+    tau;
+def runtime_internal_atomic.init():
+    tau;
+def internal_abi.init():
+    tau;
+def sync.init#1():
+    tau;
+def sync.init#2():
+    tau;
+def sync.init():
+    call sync.init#1();
+    call sync.init#2();
+def internal_bytealg.init#1():
+    if call internal_bytealg.init#1#1(); else call internal_bytealg.init#1#3(); endif;
+def internal_bytealg.init#1#1():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init#1#2():
+    tau;
+def internal_bytealg.init#1#3():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init():
+    call internal_bytealg.init#1();
+def math_rand.seedrand():
+    if call math_rand.seedrand#1(); else call math_rand.seedrand#2(); endif;
+def math_rand.seedrand#1():
+    call math_rand.seedrand#2();
+def math_rand.seedrand#2():
+    tau;
+def math_rand.rng.Seed():
+    if call math_rand.rng.Seed#1(rng_0, rng_1, rng_2); else call math_rand.rng.Seed#2(rng_0, rng_1, rng_2); endif;
+def math_rand.rng.Seed#1(rng_0, rng_1):
+    call math_rand.rng.Seed#2(rng_0, rng_1);
+def math_rand.rng.Seed#2(rng_0, rng_1, rng_2):
+    if call math_rand.rng.Seed#3(rng_0, rng_1, rng_2); else call math_rand.rng.Seed#4(rng_0, rng_1, rng_2); endif;
+def math_rand.rng.Seed#3(rng_0, rng_1):
+    call math_rand.rng.Seed#4(rng_0, rng_1);
+def math_rand.rng.Seed#4(rng_0, rng_1, rng_2):
+    call math_rand.rng.Seed#7(rng_0, rng_1, rng_2);
+def math_rand.rng.Seed#5(rng_0, rng_1):
+    call math_rand.seedrand();
+    if call math_rand.rng.Seed#8(rng_0, rng_1, rng_2); else call math_rand.rng.Seed#9(rng_0, rng_1, rng_2); endif;
+def math_rand.rng.Seed#6(rng_0, rng_1, rng_2):
+    tau;
+def math_rand.rng.Seed#7(rng_0, rng_1, rng_2):
+    ifFor (int t12 = -20; (t12<607); t12 = t12 + 1) then call math_rand.rng.Seed#5(rng_0, rng_1, rng_2); else call math_rand.rng.Seed#6(rng_0, rng_1, rng_2); endif;
+def math_rand.rng.Seed#8(rng_0, rng_1):
+    call math_rand.seedrand();
+    call math_rand.seedrand();
+    call math_rand.rng.Seed#9(rng_0, rng_1, rng_2);
+def math_rand.rng.Seed#9(rng_0, rng_1, rng_2):
+    call math_rand.rng.Seed#7(rng_0, rng_1, rng_2);
+def math_rand.NewSource():
+    call math_rand.rng.Seed();
+def math_rand.New():
+    tau;
+def math_rand.init():
+    call math_rand.NewSource();
+    call math_rand.New();
+def math.init():
+    if call math.init#1(); else call math.init#2(); endif;
+def math.init#1():
+    call math.init#2();
+def math.init#2():
+    tau;
+def math_rand.r.Int63():
+    tau;
+def math_rand.r.Int31():
+    call math_rand.r.Int63();
+def math_rand.r.Int31n():
+    if call math_rand.r.Int31n#1(); else call math_rand.r.Int31n#2(); endif;
+def math_rand.r.Int31n#1():
+    tau;
+def math_rand.r.Int31n#2():
+    if call math_rand.r.Int31n#3(); else call math_rand.r.Int31n#4(); endif;
+def math_rand.r.Int31n#3():
+    call math_rand.r.Int31();
+def math_rand.r.Int31n#4():
+    call math_rand.r.Int31();
+    call math_rand.r.Int31n#7();
+def math_rand.r.Int31n#5():
+    call math_rand.r.Int31();
+    call math_rand.r.Int31n#7();
+def math_rand.r.Int31n#6():
+    tau;
+def math_rand.r.Int31n#7():
+    if call math_rand.r.Int31n#5(); else call math_rand.r.Int31n#6(); endif;
+def math_rand.r.Int63n():
+    if call math_rand.r.Int63n#1(); else call math_rand.r.Int63n#2(); endif;
+def math_rand.r.Int63n#1():
+    tau;
+def math_rand.r.Int63n#2():
+    if call math_rand.r.Int63n#3(); else call math_rand.r.Int63n#4(); endif;
+def math_rand.r.Int63n#3():
+    call math_rand.r.Int63();
+def math_rand.r.Int63n#4():
+    call math_rand.r.Int63();
+    call math_rand.r.Int63n#7();
+def math_rand.r.Int63n#5():
+    call math_rand.r.Int63();
+    call math_rand.r.Int63n#7();
+def math_rand.r.Int63n#6():
+    tau;
+def math_rand.r.Int63n#7():
+    if call math_rand.r.Int63n#5(); else call math_rand.r.Int63n#6(); endif;
+def math_rand.r.Intn():
+    if call math_rand.r.Intn#1(); else call math_rand.r.Intn#2(); endif;
+def math_rand.r.Intn#1():
+    tau;
+def math_rand.r.Intn#2():
+    if call math_rand.r.Intn#3(); else call math_rand.r.Intn#4(); endif;
+def math_rand.r.Intn#3():
+    call math_rand.r.Int31n();
+def math_rand.r.Intn#4():
+    call math_rand.r.Int63n();
+def math_rand.Intn():
+    call math_rand.r.Intn();
 def main.main$1(progress):
     call main.main$1#3(progress);
 def main.main$1#1(progress):
+    call math_rand.Intn();
     if call main.main$1#4(progress); else call main.main$1#5(progress); endif;
+def main.main$1#2(progress):
+    tau;
 def main.main$1#3(progress):
-    if call main.main$1#1(progress); else call main.main$1#3(progress); endif;
+    ifFor (int t2 = 0; (t2<=10); t2 = t2 + 1) then call main.main$1#1(progress); else call main.main$1#2(progress); endif;
 def main.main$1#4(progress):
     send progress;
     call main.main$1#5(progress);
@@ -15,6 +157,8 @@ def main.main$1#5(progress):
     call main.main$1#3(progress);
 def main.main#1(t0):
     recv t0;
-    if call main.main#2(t0); else tau; endif;
+    if call main.main#2(t0); else call main.main#3(t0); endif;
 def main.main#2(t0):
     call main.main#1(t0);
+def main.main#3(t0):
+    tau;

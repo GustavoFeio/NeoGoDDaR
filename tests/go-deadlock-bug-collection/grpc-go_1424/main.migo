@@ -1,3 +1,8 @@
 def main.main():
     let t0 = newchan main.main0.t0_chan0, 0;
+    spawn main.lbWatcher(t0);
     recv t0;
+def main.init():
+    tau;
+def main.lbWatcher(doneChan):
+    tau;

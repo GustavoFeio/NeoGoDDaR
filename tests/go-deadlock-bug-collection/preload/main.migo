@@ -1,40 +1,199 @@
 def main.main():
     call main.preload();
+def internal_abi.init():
+    tau;
+def internal_goos.init():
+    tau;
+def sync_atomic.init():
+    tau;
+def runtime_internal_math.init():
+    tau;
+def internal_goarch.init():
+    tau;
+def internal_bytealg.init#1():
+    if call internal_bytealg.init#1#1(); else call internal_bytealg.init#1#3(); endif;
+def internal_bytealg.init#1#1():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init#1#2():
+    tau;
+def internal_bytealg.init#1#3():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init():
+    call internal_bytealg.init#1();
+def sync.init#1():
+    tau;
+def sync.init#2():
+    tau;
+def sync.init():
+    call sync.init#1();
+    call sync.init#2();
+def internal_cpu.init():
+    tau;
+def runtime_internal_sys.init():
+    tau;
+def runtime_internal_atomic.init():
+    tau;
+def runtime_internal_syscall.init():
+    tau;
+def unsafe.init():
+    tau;
+def internal_race.init():
+    tau;
+def internal_goexperiment.init():
+    tau;
+def main.init():
+    tau;
+def sync.wg.state():
+    if call sync.wg.state#1(wg_2, wg_1); else call sync.wg.state#3(wg_2, wg_1); endif;
+def sync.wg.state#1(wg_1):
+    tau;
+def sync.wg.state#2(wg_1, wg_2):
+    tau;
+def sync.wg.state#3():
+    tau;
+def internal_race.ReleaseMerge():
+    tau;
+def internal_race.Read():
+    tau;
+def internal_race.Disable():
+    tau;
+def sync.wg.Add():
+    call sync.wg.state();
+    if call sync.wg.Add#1(); else call sync.wg.Add#2(); endif;
+def sync.wg.Add#1():
+    if call sync.wg.Add#3(); else call sync.wg.Add#4(); endif;
+def sync.wg.Add#2():
+    if call sync.wg.Add#9(); else call sync.wg.Add#7(); endif;
+def sync.wg.Add#3():
+    call internal_race.ReleaseMerge();
+    call sync.wg.Add#4();
+def sync.wg.Add#4():
+    call internal_race.Disable();
+    call sync.wg.Add#2();
+def sync.wg.Add#5():
+    tau;
+def sync.wg.Add#6():
+    call internal_race.Read();
+    call sync.wg.Add#7();
+def sync.wg.Add#7():
+    if call sync.wg.Add#10(); else call sync.wg.Add#11(); endif;
+def sync.wg.Add#8():
+    tau;
+def sync.wg.Add#9():
+    tau;
+def sync.wg.Add#10():
+    tau;
+def sync.wg.Add#11():
+    if call sync.wg.Add#15(); else call sync.wg.Add#13(); endif;
+def sync.wg.Add#12():
+    tau;
+def sync.wg.Add#13():
+    if call sync.wg.Add#16(); else call sync.wg.Add#18(); endif;
+def sync.wg.Add#14():
+    tau;
+def sync.wg.Add#15():
+    tau;
+def sync.wg.Add#16():
+    tau;
+def sync.wg.Add#17():
+    if call sync.wg.Add#19(); else call sync.wg.Add#20(); endif;
+def sync.wg.Add#18():
+    tau;
+def sync.wg.Add#19():
+    tau;
+def sync.wg.Add#20():
+    call sync.wg.Add#23();
+def sync.wg.Add#21():
+    call sync.wg.Add#23();
+def sync.wg.Add#22():
+    tau;
+def sync.wg.Add#23():
+    if call sync.wg.Add#21(); else call sync.wg.Add#22(); endif;
+def main.DoSomeWork():
+    tau;
+def sync.wg.Done():
+    call sync.wg.Add();
 def main.preload$1(limitCh, ch):
-    recv limitCh (main.go:26:4);
-    send ch (main.go:28:7);
-    send limitCh (main.go:29:12);
+    recv limitCh;
+    call main.DoSomeWork();
+    send ch;
+    send limitCh;
+    call sync.wg.Done();
+def internal_race.Enable():
+    tau;
+def internal_race.Acquire():
+    tau;
+def internal_race.Write():
+    tau;
+def sync.wg.Wait():
+    call sync.wg.state();
+    if call sync.wg.Wait#1(); else call sync.wg.Wait#2(); endif;
+def sync.wg.Wait#1():
+    call internal_race.Disable();
+    call sync.wg.Wait#2();
+def sync.wg.Wait#2():
+    if call sync.wg.Wait#3(); else call sync.wg.Wait#4(); endif;
+def sync.wg.Wait#3():
+    if call sync.wg.Wait#5(); else call sync.wg.Wait#6(); endif;
+def sync.wg.Wait#4():
+    if call sync.wg.Wait#7(); else call sync.wg.Wait#2(); endif;
+def sync.wg.Wait#5():
+    call internal_race.Enable();
+    call internal_race.Acquire();
+    call sync.wg.Wait#6();
+def sync.wg.Wait#6():
+    tau;
+def sync.wg.Wait#7():
+    if call sync.wg.Wait#10(); else call sync.wg.Wait#9(); endif;
+def sync.wg.Wait#8():
+    call internal_race.Write();
+    call sync.wg.Wait#9();
+def sync.wg.Wait#9():
+    if call sync.wg.Wait#11(); else call sync.wg.Wait#12(); endif;
+def sync.wg.Wait#10():
+    tau;
+def sync.wg.Wait#11():
+    tau;
+def sync.wg.Wait#12():
+    if call sync.wg.Wait#13(); else call sync.wg.Wait#14(); endif;
+def sync.wg.Wait#13():
+    call internal_race.Enable();
+    call internal_race.Acquire();
+    call sync.wg.Wait#14();
+def sync.wg.Wait#14():
+    tau;
 def main.preload$2(ch):
+    call sync.wg.Wait();
     close ch;
+def main.IsError():
+    tau;
 def main.preload():
     let t1 = newchan main.preload0.t1_chan1, 1;
     let t4 = newchan main.preload0.t4_chan1, 1;
     call main.preload#3(t1, t4);
-
 def main.preload#1(t1, t4):
-    send t4 (main.go:20:11);
+    send t4;
     call main.preload#3(t1, t4);
-
 def main.preload#2(t1, t4):
     call main.preload#4(t1, t4);
-
 def main.preload#3(t1, t4):
     ifFor (int t9 = 0; (t9<t10); t9 = t9 + 1) then call main.preload#1(t1, t4); else call main.preload#2(t1, t4); endif;
-
 def main.preload#4(t1, t4):
     if call main.preload#5(t1, t4); else call main.preload#6(t1, t4); endif;
-
 def main.preload#5(t1, t4):
+    call sync.wg.Add();
     spawn main.preload$1(t4, t1);
     call main.preload#4(t1, t4);
-
 def main.preload#6(t1, t4):
     spawn main.preload$2(t1);
     call main.preload#7(t1, t4);
-
 def main.preload#7(t1, t4):
-    recv t1 (main.go:37:2);
-    if call main.preload#8(t1, t4); else tau; endif;
-
+    recv t1;
+    if call main.preload#8(t1, t4); else call main.preload#9(t1, t4); endif;
 def main.preload#8(t1, t4):
-    if tau; else call main.preload#7(t1, t4); endif;
+    call main.IsError();
+    if call main.preload#10(t1, t4); else call main.preload#7(t1, t4); endif;
+def main.preload#9(t1, t4):
+    tau;
+def main.preload#10(t1, t4):
+    tau;

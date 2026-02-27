@@ -2,6 +2,8 @@ def main.main():
     let t0 = newchan main.main0.t0_chan0, 0;
     spawn main.monitor(t0);
     close t0;
+def main.init():
+    tau;
 def main.monitor$1(results):
     send results;
     close results;
@@ -9,6 +11,14 @@ def main.monitor(stop):
     let t1 = newchan main.monitor0.t1_chan0, 0;
     spawn main.monitor$1(t1);
     select
-      case recv stop;
-      case recv t1;
+      case recv stop; call main.monitor#1(stop, t1);
+      case recv t1; call main.monitor#3(stop, t1);
     endselect;
+def main.monitor#1(stop, t1):
+    tau;
+def main.monitor#2(stop, t1):
+    tau;
+def main.monitor#3(stop, t1):
+    tau;
+def main.monitor#4(stop, t1):
+    tau;

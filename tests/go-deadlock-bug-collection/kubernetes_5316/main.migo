@@ -1,17 +1,150 @@
 def main.main():
     call main.finishRequest();
+def runtime_internal_atomic.init():
+    tau;
+def runtime_internal_sys.init():
+    tau;
+def internal_unsafeheader.init():
+    tau;
+def internal_goarch.init():
+    tau;
+def internal_race.init():
+    tau;
+def internal_reflectlite.toType():
+    if call internal_reflectlite.toType#1(); else call internal_reflectlite.toType#2(); endif;
+def internal_reflectlite.toType#1():
+    tau;
+def internal_reflectlite.toType#2():
+    tau;
+def internal_reflectlite.TypeOf():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Kind():
+    tau;
+def internal_reflectlite.t.Elem():
+    call internal_reflectlite.t.Kind();
+    if call internal_reflectlite.t.Elem#1(); else call internal_reflectlite.t.Elem#3(); endif;
+def internal_reflectlite.t.Elem#1():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#2():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#3():
+    if call internal_reflectlite.t.Elem#2(); else call internal_reflectlite.t.Elem#5(); endif;
+def internal_reflectlite.t.Elem#4():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#5():
+    if call internal_reflectlite.t.Elem#4(); else call internal_reflectlite.t.Elem#7(); endif;
+def internal_reflectlite.t.Elem#6():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#7():
+    if call internal_reflectlite.t.Elem#6(); else call internal_reflectlite.t.Elem#9(); endif;
+def internal_reflectlite.t.Elem#8():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#9():
+    if call internal_reflectlite.t.Elem#8(); else call internal_reflectlite.t.Elem#10(); endif;
+def internal_reflectlite.t.Elem#10():
+    tau;
+def errors.init():
+    call internal_reflectlite.TypeOf();
+    call internal_reflectlite.t.Elem();
+def internal_abi.init():
+    tau;
+def internal_bytealg.init#1():
+    if call internal_bytealg.init#1#1(); else call internal_bytealg.init#1#3(); endif;
+def internal_bytealg.init#1#1():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init#1#2():
+    tau;
+def internal_bytealg.init#1#3():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init():
+    call internal_bytealg.init#1();
+def errors.New():
+    tau;
+def internal_oserror.init():
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+def main.init():
+    tau;
+def time.init():
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+def internal_goos.init():
+    tau;
+def runtime_internal_syscall.init():
+    tau;
+def syscall.init():
+    tau;
+def sync.init#1():
+    tau;
+def sync.init#2():
+    tau;
+def sync.init():
+    call sync.init#1();
+    call sync.init#2();
+def sync_atomic.init():
+    tau;
+def runtime_internal_math.init():
+    tau;
+def internal_cpu.init():
+    tau;
+def internal_goexperiment.init():
+    tau;
+def internal_itoa.init():
+    tau;
+def unsafe.init():
+    tau;
+def internal_reflectlite.init():
+    tau;
 def main.finishRequest$1(errCh, ch):
     if call main.finishRequest$1#1(errCh, ch); else call main.finishRequest$1#3(errCh, ch); endif;
 def main.finishRequest$1#1(errCh, ch):
     send errCh;
+    call main.finishRequest$1#2(errCh, ch);
+def main.finishRequest$1#2(errCh, ch):
+    tau;
 def main.finishRequest$1#3(errCh, ch):
     send ch;
+    call main.finishRequest$1#2(errCh, ch);
+def time.when():
+    if call time.when#1(); else call time.when#2(); endif;
+def time.when#1():
+    tau;
+def time.when#2():
+    if call time.when#3(); else call time.when#4(); endif;
+def time.when#3():
+    call time.when#4();
+def time.when#4():
+    tau;
+def time.NewTimer():
+    let t0 = newchan time.NewTimer0.t0_chan1, 1;
+    call time.when();
+def time.After(t2):
+    call time.NewTimer();
 def main.finishRequest():
-    let ch = newchan main.finishRequest0.ch_chan0, 0;
-    let errCh = newchan main.finishRequest0.errCh_chan0, 0;
-    spawn main.finishRequest$1(errCh, ch);
+    let t2 = newchan main.finishRequest0.t2_chan0, 0;
+    let t4 = newchan main.finishRequest0.t4_chan0, 0;
+    spawn main.finishRequest$1(t4, t2);
+    call time.After(t8);
     select
-      case recv ch;
-      case recv errCh;
-      case tau;
+      case recv t2; call main.finishRequest#1(t2, t4);
+      case recv t4; call main.finishRequest#3(t2, t4);
+      case tau; call main.finishRequest#5(t2, t4);
     endselect;
+def main.finishRequest#1(t2, t4):
+    tau;
+def main.finishRequest#2(t2, t4):
+    tau;
+def main.finishRequest#3(t2, t4):
+    tau;
+def main.finishRequest#4(t2, t4):
+    tau;
+def main.finishRequest#5(t2, t4):
+    tau;
+def main.finishRequest#6(t2, t4):
+    tau;

@@ -3,22 +3,24 @@ def main.main():
     let t1 = newchan main.main0.t1_chan0, 0;
     let t2 = newchan main.main0.t2_chan0, 0;
     select
-      case recv t0 (main.go:9:12); call main.main#2(t0, t1, t2);
-      case send t1 (main.go:11:11); call main.main#4(t0, t1, t2);
-      case recv t2 (main.go:13:7); call main.main#6(t0, t1, t2);
+      case recv t0; call main.main#2(t0, t1, t2);
+      case send t1; call main.main#4(t0, t1, t2);
+      case recv t2; call main.main#6(t0, t1, t2);
       case tau; call main.main#7(t0, t1, t2);
     endselect;
+def main.init():
+    tau;
 def main.main#1(t0, t1, t2):
-    send t0 (main.go:17:6);
-
+    send t0;
 def main.main#2(t0, t1, t2):
     call main.main#1(t0, t1, t2);
-
+def main.main#3(t0, t1, t2):
+    tau;
 def main.main#4(t0, t1, t2):
     call main.main#1(t0, t1, t2);
-
+def main.main#5(t0, t1, t2):
+    tau;
 def main.main#6(t0, t1, t2):
     call main.main#1(t0, t1, t2);
-
 def main.main#7(t0, t1, t2):
     call main.main#1(t0, t1, t2);

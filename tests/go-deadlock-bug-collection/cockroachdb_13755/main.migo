@@ -1,30 +1,315 @@
 def main.main():
+    call context.Background();
     call main.rs.initContextClose();
+def internal_race.init():
+    tau;
+def internal_goarch.init():
+    tau;
+def internal_itoa.init():
+    tau;
+def runtime_internal_math.init():
+    tau;
+def internal_reflectlite.toType():
+    if call internal_reflectlite.toType#1(); else call internal_reflectlite.toType#2(); endif;
+def internal_reflectlite.toType#1():
+    tau;
+def internal_reflectlite.toType#2():
+    tau;
+def internal_reflectlite.TypeOf():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Kind():
+    tau;
+def internal_reflectlite.t.Elem():
+    call internal_reflectlite.t.Kind();
+    if call internal_reflectlite.t.Elem#1(); else call internal_reflectlite.t.Elem#3(); endif;
+def internal_reflectlite.t.Elem#1():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#2():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#3():
+    if call internal_reflectlite.t.Elem#2(); else call internal_reflectlite.t.Elem#5(); endif;
+def internal_reflectlite.t.Elem#4():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#5():
+    if call internal_reflectlite.t.Elem#4(); else call internal_reflectlite.t.Elem#7(); endif;
+def internal_reflectlite.t.Elem#6():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#7():
+    if call internal_reflectlite.t.Elem#6(); else call internal_reflectlite.t.Elem#9(); endif;
+def internal_reflectlite.t.Elem#8():
+    call internal_reflectlite.toType();
+def internal_reflectlite.t.Elem#9():
+    if call internal_reflectlite.t.Elem#8(); else call internal_reflectlite.t.Elem#10(); endif;
+def internal_reflectlite.t.Elem#10():
+    tau;
+def errors.init():
+    call internal_reflectlite.TypeOf();
+    call internal_reflectlite.t.Elem();
+def runtime_internal_sys.init():
+    tau;
+def internal_unsafeheader.init():
+    tau;
+def errors.New():
+    tau;
+def context.init#1():
+    close _unexported_;
+def context.init():
+    call errors.New();
+    let t6 = newchan context.init0.t6_chan0, 0;
+    call context.init#1();
+def internal_abi.init():
+    tau;
+def main.init():
+    tau;
+def internal_cpu.init():
+    tau;
+def internal_goexperiment.init():
+    tau;
+def internal_bytealg.init#1():
+    if call internal_bytealg.init#1#1(); else call internal_bytealg.init#1#3(); endif;
+def internal_bytealg.init#1#1():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init#1#2():
+    tau;
+def internal_bytealg.init#1#3():
+    call internal_bytealg.init#1#2();
+def internal_bytealg.init():
+    call internal_bytealg.init#1();
+def internal_reflectlite.init():
+    tau;
+def syscall.init():
+    tau;
+def internal_goos.init():
+    tau;
+def sync.init#1():
+    tau;
+def sync.init#2():
+    tau;
+def sync.init():
+    call sync.init#1();
+    call sync.init#2();
+def sync_atomic.init():
+    tau;
+def runtime_internal_atomic.init():
+    tau;
+def internal_oserror.init():
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+def runtime_internal_syscall.init():
+    tau;
+def time.init():
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+    call errors.New();
+def unsafe.init():
+    tau;
+def context.Background():
+    tau;
+def context.newCancelCtx():
+    tau;
+def sync_atomic.v.Load():
+    if call sync_atomic.v.Load#1(); else call sync_atomic.v.Load#3(); endif;
+def sync_atomic.v.Load#1():
+    tau;
+def sync_atomic.v.Load#2():
+    tau;
+def sync_atomic.v.Load#3():
+    tau;
+def context.parentCancelCtx():
+    if call context.parentCancelCtx#1(); else call context.parentCancelCtx#3(); endif;
+def context.parentCancelCtx#1():
+    tau;
+def context.parentCancelCtx#2():
+    if call context.parentCancelCtx#5(); else call context.parentCancelCtx#4(); endif;
+def context.parentCancelCtx#3():
+    tau;
+def context.parentCancelCtx#4():
+    tau;
+def context.parentCancelCtx#5():
+    call sync_atomic.v.Load();
+    if call context.parentCancelCtx#6(); else call context.parentCancelCtx#7(); endif;
+def context.parentCancelCtx#6():
+    tau;
+def context.parentCancelCtx#7():
+    tau;
+def internal_race.Acquire():
+    tau;
+def sync.m.lockSlow():
+    call sync.m.lockSlow#1();
+def sync.m.lockSlow#1():
+    if call sync.m.lockSlow#5(); else call sync.m.lockSlow#4(); endif;
+def sync.m.lockSlow#2():
+    if call sync.m.lockSlow#37(); else call sync.m.lockSlow#38(); endif;
+def sync.m.lockSlow#3():
+    if call sync.m.lockSlow#7(); else call sync.m.lockSlow#10(); endif;
+def sync.m.lockSlow#4():
+    if call sync.m.lockSlow#11(); else call sync.m.lockSlow#12(); endif;
+def sync.m.lockSlow#5():
+    tau;
+def sync.m.lockSlow#6():
+    call sync.m.lockSlow#7();
+def sync.m.lockSlow#7():
+    call sync.m.lockSlow#1();
+def sync.m.lockSlow#8():
+    tau;
+def sync.m.lockSlow#9():
+    tau;
+def sync.m.lockSlow#10():
+    tau;
+def sync.m.lockSlow#11():
+    call sync.m.lockSlow#12();
+def sync.m.lockSlow#12():
+    if call sync.m.lockSlow#13(); else call sync.m.lockSlow#14(); endif;
+def sync.m.lockSlow#13():
+    call sync.m.lockSlow#14();
+def sync.m.lockSlow#14():
+    if call sync.m.lockSlow#17(); else call sync.m.lockSlow#16(); endif;
+def sync.m.lockSlow#15():
+    call sync.m.lockSlow#16();
+def sync.m.lockSlow#16():
+    if call sync.m.lockSlow#18(); else call sync.m.lockSlow#19(); endif;
+def sync.m.lockSlow#17():
+    tau;
+def sync.m.lockSlow#18():
+    if call sync.m.lockSlow#20(); else call sync.m.lockSlow#21(); endif;
+def sync.m.lockSlow#19():
+    if call sync.m.lockSlow#22(); else call sync.m.lockSlow#23(); endif;
+def sync.m.lockSlow#20():
+    call sync.m.lockSlow#21();
+def sync.m.lockSlow#21():
+    call sync.m.lockSlow#19();
+def sync.m.lockSlow#22():
+    if call sync.m.lockSlow#2(); else call sync.m.lockSlow#24(); endif;
+def sync.m.lockSlow#23():
+    call sync.m.lockSlow#1();
+def sync.m.lockSlow#24():
+    if call sync.m.lockSlow#25(); else call sync.m.lockSlow#26(); endif;
+def sync.m.lockSlow#25():
+    call sync.m.lockSlow#26();
+def sync.m.lockSlow#26():
+    if call sync.m.lockSlow#28(); else call sync.m.lockSlow#27(); endif;
+def sync.m.lockSlow#27():
+    call sync.m.lockSlow#28();
+def sync.m.lockSlow#28():
+    if call sync.m.lockSlow#29(); else call sync.m.lockSlow#30(); endif;
+def sync.m.lockSlow#29():
+    if call sync.m.lockSlow#31(); else call sync.m.lockSlow#33(); endif;
+def sync.m.lockSlow#30():
+    call sync.m.lockSlow#1();
+def sync.m.lockSlow#31():
+    call sync.m.lockSlow#32();
+def sync.m.lockSlow#32():
+    if call sync.m.lockSlow#36(); else call sync.m.lockSlow#34(); endif;
+def sync.m.lockSlow#33():
+    tau;
+def sync.m.lockSlow#34():
+    call sync.m.lockSlow#35();
+def sync.m.lockSlow#35():
+    call sync.m.lockSlow#2();
+def sync.m.lockSlow#36():
+    tau;
+def sync.m.lockSlow#37():
+    call internal_race.Acquire();
+    call sync.m.lockSlow#38();
+def sync.m.lockSlow#38():
+    tau;
+def sync.m.Lock():
+    if call sync.m.Lock#1(); else call sync.m.Lock#2(); endif;
+def sync.m.Lock#1():
+    if call sync.m.Lock#3(); else call sync.m.Lock#4(); endif;
+def sync.m.Lock#2():
+    call sync.m.lockSlow();
+def sync.m.Lock#3():
+    call internal_race.Acquire();
+    call sync.m.Lock#4();
+def sync.m.Lock#4():
+    tau;
+def internal_race.Release():
+    tau;
+def sync.m.unlockSlow():
+    if call sync.m.unlockSlow#1(); else call sync.m.unlockSlow#2(); endif;
+def sync.m.unlockSlow#1():
+    call sync.m.unlockSlow#2();
+def sync.m.unlockSlow#2():
+    if call sync.m.unlockSlow#3(); else call sync.m.unlockSlow#4(); endif;
+def sync.m.unlockSlow#3():
+    call sync.m.unlockSlow#5();
+def sync.m.unlockSlow#4():
+    tau;
+def sync.m.unlockSlow#5():
+    if call sync.m.unlockSlow#6(); else call sync.m.unlockSlow#8(); endif;
+def sync.m.unlockSlow#6():
+    tau;
+def sync.m.unlockSlow#7():
+    if call sync.m.unlockSlow#9(); else call sync.m.unlockSlow#10(); endif;
+def sync.m.unlockSlow#8():
+    tau;
+def sync.m.unlockSlow#9():
+    tau;
+def sync.m.unlockSlow#10():
+    call sync.m.unlockSlow#5();
+def sync.m.Unlock():
+    if call sync.m.Unlock#1(); else call sync.m.Unlock#2(); endif;
+def sync.m.Unlock#1():
+    call internal_race.Release();
+    call sync.m.Unlock#2();
+def sync.m.Unlock#2():
+    if call sync.m.Unlock#3(); else call sync.m.Unlock#4(); endif;
+def sync.m.Unlock#3():
+    call sync.m.unlockSlow();
+    call sync.m.Unlock#4();
+def sync.m.Unlock#4():
+    tau;
 def context.propagateCancel$1():
     let t1 = newchan nilchan, 0;
     let t3 = newchan nilchan, 0;
     select
-      case recv t1;
-      case recv t3;
+      case recv t1; call context.propagateCancel$1#2();
+      case recv t3; call context.propagateCancel$1#4();
     endselect;
+def context.propagateCancel$1#1():
+    tau;
+def context.propagateCancel$1#2():
+    call context.propagateCancel$1#1();
+def context.propagateCancel$1#3():
+    tau;
+def context.propagateCancel$1#4():
+    call context.propagateCancel$1#1();
+def context.propagateCancel$1#5():
+    tau;
 def context.propagateCancel():
-    if tau; else call context.propagateCancel#2(); endif;
+    if call context.propagateCancel#1(); else call context.propagateCancel#2(); endif;
+def context.propagateCancel#1():
+    tau;
 def context.propagateCancel#2():
     let t3 = newchan nilchan, 0;
     select
-      case recv t3;
+      case recv t3; call context.propagateCancel#3();
       case tau; call context.propagateCancel#4();
     endselect;
+def context.propagateCancel#3():
+    tau;
 def context.propagateCancel#4():
+    call context.parentCancelCtx();
     if call context.propagateCancel#5(); else call context.propagateCancel#7(); endif;
 def context.propagateCancel#5():
+    call sync.m.Lock();
     if call context.propagateCancel#8(); else call context.propagateCancel#10(); endif;
+def context.propagateCancel#6():
+    tau;
 def context.propagateCancel#7():
     spawn context.propagateCancel$1();
+    call context.propagateCancel#6();
 def context.propagateCancel#8():
     call context.propagateCancel#9();
 def context.propagateCancel#9():
-    tau;
+    call sync.m.Unlock();
+    call context.propagateCancel#6();
 def context.propagateCancel#10():
     if call context.propagateCancel#11(); else call context.propagateCancel#12(); endif;
 def context.propagateCancel#11():
@@ -32,12 +317,26 @@ def context.propagateCancel#11():
 def context.propagateCancel#12():
     call context.propagateCancel#9();
 def context.WithCancel():
-    if tau; else call context.WithCancel#2(); endif;
+    if call context.WithCancel#1(); else call context.WithCancel#2(); endif;
+def context.WithCancel#1():
+    tau;
 def context.WithCancel#2():
+    call context.newCancelCtx();
     call context.propagateCancel();
+def main.rs.close():
+    if call main.rs.close#1(rs_1, rs_0); else call main.rs.close#2(rs_1, rs_0); endif;
+def main.rs.close#1(rs_1):
+    tau;
+def main.rs.close#2(rs_1):
+    if call main.rs.close#3(rs_1, rs_0); else call main.rs.close#4(rs_1, rs_0); endif;
+def main.rs.close#3(rs_1, rs_0):
+    call main.rs.close#4(rs_1, rs_0);
+def main.rs.close#4(rs_1, rs_0):
+    tau;
 def main.rs.awaitDone():
     let t0 = newchan nilchan, 0;
     recv t0;
+    call main.rs.close();
 def main.rs.initContextClose():
     call context.WithCancel();
     spawn main.rs.awaitDone();
