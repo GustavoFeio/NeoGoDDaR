@@ -1,14 +1,14 @@
 # Table of Contents
 1. [NeoGoDDaR](#neogoddar) <br>
-	1.1. [Features](#features) <br>
-	1.2. [Workflow](#workflow) <br>
-		1.2.1. [Components](#components) <br>
+	1. [Features](#features) <br>
+	2. [Workflow](#workflow) <br>
+		1. [Components](#components) <br>
 2. [Requirements](#requirements) <br>
-	2.1. [Installation](#installation) <br>
+	1. [Installation](#installation) <br>
 3. [Usage](#usage) <br>
-	3.1. [Modes of operation](#operation_modes) <br>
-	3.2. [Test cases](#test_cases) <br>
-		3.2.1. [Example usage](#example_usage) <br>
+	1. [Modes of operation](#operation_modes) <br>
+	2. [Test cases](#test_cases) <br>
+		1. [Example usage](#example_usage) <br>
 
 ---
 
