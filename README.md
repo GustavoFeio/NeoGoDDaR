@@ -2,7 +2,7 @@
 1. [NeoGoDDaR](#neogoddar) <br>
 	1.1. [Features](#features) <br>
 	1.2. [Workflow](#workflow) <br>
-		1.2.3. [Components](#components) <br>
+		1.2.1. [Components](#components) <br>
 2. [Requirements](#requirements) <br>
 	2.1. [Installation](#installation) <br>
 3. [Usage](#usage) <br>
@@ -78,7 +78,7 @@ $ git clone https://github.com/GustavoFeio/NeoGoDDaR.git
 ```
 $ cd NeoGoDDaR
 $ dune build
-$ dune exec -- GoDDaR
+$ dune exec -- GoDDaR --help
 ```
 * (Optional) For automatic patching of Go code, installation of the `fixer` program is necessary.
 ```
