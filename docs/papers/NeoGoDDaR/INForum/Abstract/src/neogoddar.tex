@@ -1,0 +1,192 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.21 of 2022/01/12
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+% T1 fonts will be used to generate the final print and online PDFs,
+% so please use T1 fonts in your manuscript whenever possible.
+% Other font encondings may result in incorrect characters.
+%
+\usepackage{graphicx}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+\usepackage{orcidlink}
+\usepackage{hyperref}
+\usepackage{cleveref}
+% If you use the hyperref package, please uncomment the following two lines
+% to display URLs in blue roman font according to Springer's eBook style:
+\usepackage{xcolor}
+\usepackage{color}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+\urlstyle{rm}
+\pagenumbering{gobble}
+%
+% \usepackage{pifont}
+%
+\begin{document}
+%
+\title{Automatic Deadlock Detection in Go Code (Extended Abstract)%
+\thanks{We thank the reviewers for their constructive feedback. This work is supported by UID/04516/NOVA Laboratory for Computer Science and Informatics (NOVA LINCS) with the financial support of FCT.IP}}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Gustavo Feio\orcidlink{0009-0008-0802-1005} \and
+António Ravara\orcidlink{0000-0001-8074-0380} \and
+João Lourenço\orcidlink{0000-0002-8495-6442}}
+%
+\authorrunning{G. Feio et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{NOVA FCT --- NOVA LINCS, Caparica, Portugal}
+%
+\maketitle              % typeset the header of the contribution
+
+\begin{abstract}
+Concurrent programming in Go relies on message-passing primitives that, while powerful, remain prone to deadlocks that are notoriously difficult to reproduce and detect at runtime. 
+While various static analysis tools have been developed to mitigate these risks, the majority focus strictly on detection rather than automated resolution. 
+This paper presents NeoGoDDaR, an enhanced iteration of the GoDDaR (Go Deadlock Detection and Resolution) framework. 
+NeoGoDDaR extends the original tool’s capabilities by implementing support for essential Go patterns, including channel closing, asynchronous buffered channels, and improved recursion handling. 
+Experimental evaluations using real-world bug collections demonstrate that NeoGoDDaR is a strict improvement over its predecessor. 
+Furthermore, the tool outperforms several state-of-the-art static analysis engines by correctly identifying and suggesting fixes for complex concurrency bugs with zero false negatives.
+
+\keywords{Go \and Deadlock Detection \and Static Analysis \and Concurrency \and Program Repair.}
+\end{abstract}
+
+\section{Introduction}
+The Go programming language provides an easy-to-use interface to work with its lightweight threads at the cost of leaving programs prone to concurrency bugs. An attempt at preventing some of these bugs lies in the promotion of sharing data through message-based communication~\cite{GoProverb,EffectiveGo}. Still, deadlocks, one of the most notable concurrency bugs, are still a danger and cause the whole program to block silently and are often hard to reproduce.
+
+To mitigate deadlocks and their impact, %the Go authors implemented
+Go offers a runtime deadlock detector, but it is unreliable if at least one thread remains running. Therefore, static detection is essential for developing dependable concurrent software.
+
+\paragraph*{Related Work}
+There are many tools addressing the topic of detecting deadlocks by way of static analysis, such as GCatch/GFix~\cite{GCatch}, Go2Pins~\cite{Go2Pins}, \textsc{goat}~\cite{Goat}, GoDDaR~\cite{GoDDaR}, Gomela~\cite{Gomela}, Gong~\cite{Gong}, Mini-Go~\cite{MiniGo_Automata}, and nano-Go~\cite{nanoGo}. 
+Most of these tools operate on a restricted subset of Go and rely on intermediate representations centered on communication primitives.
+
+\paragraph*{GoDDaR.}
+While most existing tools focus primarily on statically detecting safety violations, addressing the repair of identified issues is equally critical. 
+To our knowledge, only GFix and GoDDaR attempt to tackle this problem by providing automated suggestions for resolving certain classes of deadlocks.
+
+% Repair remains a challenging task due to the inherent complexity of concurrent programs, which are often difficult to reason about.
+
+GoDDaR performs symbolic analysis over the Calculus of Communicating Systems~\cite{MilnerCCS}, a communication focused language, obtained by translating MiGo~\cite{MiGo}, which is itself inferred from Go through \textit{migoinfer}.
+
+Working on pairing and reducing synchronizing actions, such as reads and writes on a channel, the detection algorithm is able to detect deadlocks if there are still pending actions to be executed, but no more reductions are available.
+Detected deadlocks can then be solved through one of two heuristics:
+\begin{itemize}
+    \item The first simply parallelizes any problematic actions;
+    \item The second does the same as the first heuristic for outputs, but for inputs it searches for and parallelizes the corresponding output, or creates one if it does not exist.
+\end{itemize}
+
+However, the tool in its current state is limited in scope due to not handling Go features such as asynchronous channels, for example.
+
+
+\section{NeoGoDDaR}
+NeoGoDDaR focus on improving the detection capabilities of GoDDaR, namely by adding support for commonly used Go patterns, namly: 
+\begin{itemize}
+    \item \textbf{Channel Closing:} Reading from a closed channel is reduced unconditionally, whereas writing results in an error.
+    \item \textbf{Asynchronous Channels:} Channels are modeled with capacity and size attributes to handle buffered communication.
+    \item \textbf{Recursion:} NeoGoDDaR handles recursion at runtime by storing process definitions and lazily expanding them.
+\end{itemize}
+The last point is important because \textit{migoinfer} often models loops as recursive processes, and GoDDaR does not consider MiGo's support for recursion.
+NeoGoDDaR was tested on our extension of the benchmark~\cite{BugCollection}, which collects significant tests from the literature, along with other state-of-the-art tools: GCatch~\cite{GCatch}, \textsc{goat}~\cite{Goat}, Gomela~\cite{Gomela}, and Gong~\cite{Gong}.
+
+Results showed NeoGoDDaR correctly identified~12 out of~19 bugs with zero false negatives, strictly outperforming the original GoDDaR and most state-of-the-art tools.
+Moreover, NeoGoDDaR preserves GoDDaR's fixing capabilities, also outperforming the other state-of-the-art tools in this matter.
+
+\section{Future Work}
+Current limitations may lie in the intermediate representation being used, MiGo, which is no longer actively supported.
+As future work, we intend to explore alternative intermediate representations and evaluate their impact.
+Such a transition could significantly enhance NeoGoDDaR’s effectiveness and robustness.
+
+\iffalse
+% \section{Introduction}
+Go is a statically typed programming language that features native concurrency support via lightweight threads called \emph{goroutines} and a message-passing mechanism using \emph{channels}.
+While these primitives are designed to promote safe concurrent programming by favoring communication over shared memory~\cite{GoProverb,EffectiveGo}, they do not eliminate the risk of concurrency-related bugs, particularly \emph{deadlocks}.
+
+A deadlock occurs when goroutines become indefinitely blocked waiting for events that will never occur.
+Although the Go runtime can detect global deadlocks (i.e., when all goroutines are blocked), it fails to detect \emph{local deadlocks}.
+As concurrency bugs can be notoriously difficult to reproduce and debug, static analysis tools play a crucial role in improving reliability.
+
+While a number of tools have been developed for statically detecting deadlocks in Go, very few also attempt to \emph{resolve} them.
+This paper presents NeoGoDDaR, an enhanced version of the GoDDaR (Go Deadlock Detection and Resolution) tool that not only detects deadlocks but also suggests fixes.
+We successfully extended GoDDaR’s capabilities to support more common Go patterns, bringing it closer to the goal of analyzing real-world code.
+
+% \section{The Base GoDDaR}
+GoDDaR~\cite{GoDDaR} is a static analysis tool that detects and resolves deadlocks by translating Go programs into an intermediate representation called \textit{MiGo}~\cite{MiGo}, which is then transformed into \textit{CCS} (Calculus of Communicating Systems), a language focused on message-based communication.
+
+The tool performs symbolic analysis over CCS expressions, pairing and reducing matching synchronizing actions to identify deadlocks (e.g., reads and writes).
+A deadlock is reported if no further reductions are possible and pending actions remain.
+Furthermore, GoDDaR offers two heuristics to suggest fixes:
+\begin{itemize}
+     \item The first heuristic parallelizes any problematic actions;
+     \item The second heuristic uses the previous approach for outputs, and for inputs the corresponding output action is parallelized, or introduced if it does not exist.
+\end{itemize}
+
+Despite these features, GoDDaR was limited in scope, as it only supported synchronous channels, and basic loops (modeled as simple conditional branches).
+Asynchronous channels and channel closing---common Go patterns in real-world programs---were unsupported, and process recursion was also underdeveloped.
+Additionally, the underlying MiGo intermediate representation (produced by the \textit{migoinfer} tool) is outdated and prone to bugs.
+
+% \section{NeoGoDDaR: Extending GoDDaR}
+To extend GoDDaR, three features we deemed the most pertinent were implemented: channel closing, asyncrhonous channels, and enhanced recursion.
+The resulting tool was named NeoGoDDaR.
+
+% \subsection{Channel Closing}
+Go channels can be closed, which results in different behaviors for reads and writes.
+Reading from a closed channel always succeeds (yielding a default value) while writing or repeated closes raise runtime errors.
+
+GoDDaR's internal channel representation was expanded to include new attributes, such as a channel's open or closed status.
+During analysis, a read on a closed channel is reduced unconditionally, whereas a write or second close result in an error report.
+This enhancement improves the tool’s fidelity to Go’s semantics and allows it to detect misuse of channels, which were previously not checked.
+
+% \subsection{Asynchronous Channels}
+Asynchronous channels are channels with an associated queue with a given capacity.
+Writes to these channels do not block unless the buffer is full, while reads do not block unless the buffer is empty.
+NeoGoDDaR models this by associating each channel with a capacity and size attributes, and incrementing/decrementing the count accordingly.
+
+If a buffer has space, writes proceed; if it has values, reads proceed.
+Otherwise, the tool falls back to blocking behavior as with synchronous channels.
+This extension enables NeoGoDDaR to handle many realistic communication patterns unsupported in the original tool.
+
+% \subsection{Recursion}
+Since MiGo often models loops as recursive processes, the lack of support for recursive processes greatly limited GoDDaR.
+This is because the CCS expression had to be fully generated before analysis, which would cause infinite expansions in cyclic recursive calls
+
+NeoGoDDaR handles recursion at runtime by storing process definitions and lazily expanding them when called.
+To prevent infinite loops, it inherited GoDDaR's existing duplicate state check mechanism, which halts analysis if the current state has already been visited.
+
+% \section{State of the Art}
+To evaluate NeoGoDDaR's performance, we benchmarked it using the test suite \verb|go-deadlock-bug-collection|, which includes simplified real-world bug cases.
+
+NeoGoDDaR was evaluated alongside state-of-the-art tools including GCatch, \textsc{goat}, Gomela, Gong, and the original GoDDaR.
+Results showed that NeoGoDDaR outperformed most of these tools, correctly identifying~12 out of~19 bugs and exhibiting zero false negatives, falling only behind \textsc{goat}.
+In contrast, GoDDaR reported only~7 true positives and~1 false negative.
+Furthermore, NeoGoDDaR preserved all previously working cases, showing it is a strict improvement upon GoDDaR.
+
+% \section{Conclusion}
+Our work on NeoGoDDaR represents a step forward in the development of static deadlock detection and resolution tools for Go.
+By extending GoDDaR to support asynchronous channels, channel closing, and recursion, the tool becomes more suitable for real-world program analysis.
+Experimental results show that NeoGoDDaR matches or outperforms existing tools in detection accuracy.
+Although some limitations remain, particularly around the MiGo intermediate representation, we have laid the groundwork for future extensions toward broader concurrency support in Go.
+
+% \section{Future Work}
+Despite the advances, NeoGoDDaR still faces challenges.
+The dependency on \textit{migoinfer} leaves NeoGoDDaR unable to identify programs that cannot be converted into MiGo, limiting applicability.
+Swapping the intermediate representation for a more robust alternative would greatly improve the tool's potential.
+
+Another limitation stems from recursion handling.
+While basic cycles are detected, certain infinite recursive patterns may not be caught by the duplicate state check if they do not perform actual reductions.
+Additional safeguards are needed to prevent these edge-case infinite loops.
+
+Finally, NeoGoDDaR focuses solely on channel-based communication.
+It would be interesting to expand analysis to other primitives, such as mutexes and waitgroups.
+\fi
+
+\bibliographystyle{splncs04}
+\bibliography{mybibliography}
+\end{document}
