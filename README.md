@@ -7,8 +7,8 @@
 	1. [Installation](#installation) <br>
 3. [Usage](#usage) <br>
 	1. [Modes of operation](#operation_modes) <br>
-	2. [Test cases](#test_cases) <br>
 		1. [Example usage](#example_usage) <br>
+	2. [Test cases](#test_cases) <br>
 
 ---
 
@@ -97,11 +97,6 @@ The tool has a subcommand to process each representation:
 | Go             | `GoDDaR go <Go file>`     |
 | MiGo           | `GoDDaR migo <MiGo file>` |
 | CCS            | `GoDDaR ccs <process>`    |
-
-## Test cases <a name="test_cases"></a>
-The `tests/` directory contains two types of benchmarks:
-- The benchmark used during development, `examples/`;
-- And the benchmark for performance evaluation `go-deadlock-bug-collection/`.
 
 ### Example usage <a name="example_usage"></a>
 
@@ -195,3 +190,21 @@ func main() {
 	<-ch1
 }
 ```
+
+## Test cases <a name="test_cases"></a>
+The `tests/` directory contains two types of benchmarks:
+- The benchmark used during development, `examples/`;
+- And the benchmark for performance evaluation `go-deadlock-bug-collection/`.
+
+The first benchmark includes programs used ruing development of the tool and acts as a sanity check that NeoGoDDaR is working correctly.
+Running the bash script  `tests/examples/run_benchmark.sh` should yield the following result:
+```
+Results: 58/58 tests passed
+```
+
+The second benchmark includes programs used to evaluate our tool's performance under (minimal) real-world scenarios.
+Running the bash script `tests/go-deadlock-bug-collection/run_benchmark.sh` should yield the following result:
+```
+Results: 16/22 tests executed successfully
+```
+**These results are expected** because of limitations resulting from the `migoinfer` tool, which does not provide a correct intermediate representation for some programs, causing runtime exceptions or parsing errors.
