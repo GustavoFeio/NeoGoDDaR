@@ -58,7 +58,9 @@ RUN cd /home/NeoGoDDaR/gospal/cmd/migoinfer \
     && go install
 
 # Step 2: Clone and build NeoGoDDaR
-RUN git clone https://github.com/GustavoFeio/NeoGoDDaR.git /home/NeoGoDDaR/NeoGoDDaR
+RUN git clone https://github.com/GustavoFeio/NeoGoDDaR.git /home/NeoGoDDaR/NeoGoDDaR \
+    && cd /home/NeoGoDDaR/NeoGoDDaR \
+    && git pull
 
 RUN cd /home/NeoGoDDaR/NeoGoDDaR \
     && dune build
